@@ -9,3 +9,5 @@ Created .gitignore file and pushed original repository to github//
 Added method main with print//
 
 Added static method print//
+
+Added overload method print//
