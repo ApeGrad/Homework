@@ -20,13 +20,8 @@ public class JournalEvents {
         while (myFileReader.hasNextLine()) {
             line = myFileReader.nextLine();
             events[i++] = line.split(line.substring(line.lastIndexOf(",", line.lastIndexOf(","))));
-            if (line.contains("false")) {
-                booleans[index] = false;
-                index++;
-            } else {
-                booleans[index] = true;
-                index++;
-            }
+            booleans[index] = !line.contains("false");
+            index++;
         }
         out.println(Arrays.toString(booleans));
         out.println(Arrays.deepToString(events));
