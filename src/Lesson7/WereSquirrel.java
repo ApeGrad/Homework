@@ -19,7 +19,7 @@ public class WereSquirrel {
         int size = returnArraySizeNew(fileName);
         events = new String[size];
         squirrel = new boolean[size];
-        soloEvents = new String[size * 4];
+        soloEvents = new String[size];
         Scanner myFileReader = new Scanner(new File(fileName));
         int i = 0;
         while (myFileReader.hasNextLine()) {
@@ -33,14 +33,14 @@ public class WereSquirrel {
         removeEmptyStrings(soloEvents);
         System.out.println(Arrays.toString(soloEvents));
 
-        for (int j = 0; j < soloEvents.length; j++) {
-            double corellation = phi(tableFor2(soloEvents[j], events));
-            if (corellation > 0.1 || corellation < -0.1) {
-                System.out.println(soloEvents[j] + "    : " + corellation);
+        for (String soloEvent : soloEvents) {
+            double corellation = phi(tableFor(soloEvent, events));
+            if (corellation > 0.3 || corellation < -0.3) {
+                System.out.println(soloEvent + "    : " + corellation);
             }
         }
         returnPeanut(events);
-        System.out.println("\nДля нового события:  арахис-зубы:   " + phi(tableFor2("арахис-зубы", events)));
+        System.out.println("\nДля нового события:  арахис-зубы:   " + phi(tableFor("арахис-зубы", events)));
     }
 
     public static double phi(int[] table) {
@@ -51,7 +51,7 @@ public class WereSquirrel {
                         (table[0] + table[2]));
     }
 
-    public static int[] tableFor2(String event, String[] journal) {
+    public static int[] tableFor(String event, String[] journal) {
         int[] table = {0, 0, 0, 0};
         for (String entry : journal) {
             if (entry.contains(event) && entry.contains("false")) {
@@ -75,16 +75,19 @@ public class WereSquirrel {
         return table;
     }
 
-    public static String[] makeSoloEvent(String string) throws IOException {
-        String line;
+    public static String[] makeSoloEvent(String inputFile) throws IOException {
         int j = 0;
-        Scanner myFileReader = new Scanner(new File(string));
+        Scanner myFileReader = new Scanner(new File(inputFile));
         while (myFileReader.hasNextLine()) {
-            line = myFileReader.nextLine();
-            frame = line.substring(0, line.lastIndexOf(',', line.lastIndexOf(',')));
+            inputFile = myFileReader.nextLine();
+            frame = inputFile.substring(0, inputFile.lastIndexOf(',', inputFile.lastIndexOf(',')));
             String[] values = frame.split(",");
             for (String value : values) {
+                if(j >= soloEvents.length){
+                    soloEvents = Arrays.copyOf(soloEvents,soloEvents.length+10);
+                }
                 soloEvents[j++] = value;
+
             }
         }
         return soloEvents;
@@ -135,11 +138,11 @@ public class WereSquirrel {
         soloEvents = Arrays.copyOf(result,validStrings);
         return soloEvents;
     }
-    
+
     public static String [] returnPeanut(String[]arr){
         int farIndex = 0;
-        String [] result = new String[events.length];
-        for (String entry : events) {
+        String [] result = new String[arr.length];
+        for (String entry : arr) {
             if(!entry.contains("ел арахис") && !entry.contains("чистил зубы") | entry.contains("чистил зубы") ){
                 result[farIndex++] = entry;
             }
