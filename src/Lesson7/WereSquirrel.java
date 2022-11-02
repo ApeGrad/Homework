@@ -10,8 +10,6 @@ public class WereSquirrel {
     static String[] events;
     static boolean[] squirrel;
     final static String fileName = "C:/users/legion/desktop/journalEvents_ru.csv";
-    static String entry;
-    static int[] action;
     static String[] soloEvents;
     static int index;
     static String frame;
@@ -26,7 +24,6 @@ public class WereSquirrel {
         int i = 0;
         while (myFileReader.hasNextLine()) {
             line = myFileReader.nextLine();
-            frame = line.substring(0, line.lastIndexOf(',', line.lastIndexOf(',')));
             events[i++] = line;
             squirrel[index] = !line.contains("false");
             index++;
@@ -43,12 +40,7 @@ public class WereSquirrel {
             }
         }
         returnPeanut(events);
-
         System.out.println("\nДля нового события:  арахис-зубы:   " + phi(tableFor2("арахис-зубы", events)));
-
-
-
-
     }
 
     public static double phi(int[] table) {
@@ -57,7 +49,6 @@ public class WereSquirrel {
                         (table[0] + table[1]) *
                         (table[1] + table[3]) *
                         (table[0] + table[2]));
-
     }
 
     public static int[] tableFor2(String event, String[] journal) {
@@ -84,7 +75,6 @@ public class WereSquirrel {
         return table;
     }
 
-
     public static String[] makeSoloEvent(String string) throws IOException {
         String line;
         int j = 0;
@@ -100,7 +90,6 @@ public class WereSquirrel {
         return soloEvents;
     }
 
-
     public static int returnArraySizeNew(String string) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(string), StandardCharsets.UTF_8));
         int lineCount = 0;
@@ -112,7 +101,6 @@ public class WereSquirrel {
         br.close();
         return lineCount;
     }
-
 
     public static String[] removeDuplicate(String[] str, int size) {
         for (int i = 0; i < size - 1; i++) {
@@ -127,7 +115,6 @@ public class WereSquirrel {
         for (int i = 0; i < size; i++) {
             if (str[i] == null)
                 str[i] = "";
-
         }
         return str;
 
@@ -148,7 +135,7 @@ public class WereSquirrel {
         soloEvents = Arrays.copyOf(result,validStrings);
         return soloEvents;
     }
-
+    
     public static String [] returnPeanut(String[]arr){
         int farIndex = 0;
         String [] result = new String[events.length];
