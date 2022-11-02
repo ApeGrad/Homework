@@ -34,8 +34,8 @@ public class WereSquirrel {
         System.out.println(Arrays.toString(soloEvents));
 
         for (String soloEvent : soloEvents) {
-            double corellation = phi(tableFor(soloEvent, events));
-            if (corellation > 0.3 || corellation < -0.3) {
+            double correlation = phi(tableFor(soloEvent, events));
+            if (correlation > 0.3 || correlation < -0.3) {
                 System.out.println(soloEvent + "    : " + corellation);
             }
         }
